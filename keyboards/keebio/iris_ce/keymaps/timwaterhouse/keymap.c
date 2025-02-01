@@ -10,16 +10,20 @@ enum custom_layers {
 };
 
 // Left-hand home row mods
-#define HOME_N LSFT_T(KC_N)
-#define HOME_R LCTL_T(KC_R)
-#define HOME_T LALT_T(KC_T)
-#define HOME_S LGUI_T(KC_S)
+#define HOME_N LGUI_T(KC_N)
+#define HOME_R LALT_T(KC_R)
+#define HOME_T LCTL_T(KC_T)
+#define HOME_S LSFT_T(KC_S)
+#define HOME_D HYPR_T(KC_D)
+#define HOME_C MEH_T(KC_C)
 
 // Right-hand home row mods
-#define HOME_H RGUI_T(KC_H)
-#define HOME_A LALT_T(KC_A)
-#define HOME_E RCTL_T(KC_E)
-#define HOME_I RSFT_T(KC_I)
+#define HOME_H RSFT_T(KC_H)
+#define HOME_A LCTL_T(KC_A)
+#define HOME_E RALT_T(KC_E)
+#define HOME_I RGUI_T(KC_I)
+#define HOME_Y MEH_T(KC_Y)
+#define HOME_O HYPR_T(KC_O)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -27,10 +31,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_B,    KC_L,    KC_D,    KC_C,    KC_V,                               KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_DEL,
+     KC_TAB,  KC_B,    KC_L,    HOME_D,  HOME_C,  KC_V,                               KC_J,    HOME_Y,  HOME_O,  KC_U,    KC_COMM, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LCTL, HOME_N,  HOME_R,  HOME_T,  HOME_S,  KC_G,                               KC_P,    HOME_H,  HOME_A,  HOME_E,  HOME_I,  KC_SLSH,
-     /* KC_LCTL, KC_N,    KC_R,    KC_T,    KC_S,    KC_G,                               KC_P,    KC_H,    KC_A,    KC_E,    KC_I,    KC_SLSH, */
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_X,    KC_Q,    KC_M,    KC_W,    KC_Z,    KC_HOME,          KC_END,  KC_K,    KC_F,    KC_QUOT, KC_SCLN, KC_DOT,  KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -46,8 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LBRC,                            KC_RBRC, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, KC_PIPE,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_NEXT, EE_CLR,  DT_PRNT, DT_DOWN, DT_UP, KC_LCBR, KC_LPRN,          KC_RPRN, KC_RCBR, KC_P1,   KC_P2,   KC_P3,   KC_MINS, _______,
-     /* RM_NEXT, EE_CLR,  _______, _______, _______, KC_LCBR, KC_LPRN,          KC_RPRN, KC_RCBR, KC_P1,   KC_P2,   KC_P3,   KC_MINS, _______, */
+     RM_NEXT, EE_CLR,  DT_PRNT, DT_DOWN, DT_UP,   KC_LCBR, KC_LPRN,          KC_RPRN, KC_RCBR, KC_P1,   KC_P2,   KC_P3,   KC_MINS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, KC_DEL,                    KC_DEL,  _______, KC_P0
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
