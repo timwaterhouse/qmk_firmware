@@ -1,6 +1,7 @@
 // Copyright 2023 Danny Nguyen (@nooges)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+#include "print.h"
 #include QMK_KEYBOARD_H
 
 enum custom_layers {
@@ -29,15 +30,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+     QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MPLY,
+     /* QK_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DB_TOGG, */
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_B,    KC_L,    HOME_D,  HOME_C,  KC_V,                               KC_J,    HOME_Y,  HOME_O,  KC_U,    KC_COMM, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LCTL, HOME_N,  HOME_R,  HOME_T,  HOME_S,  KC_G,                               KC_P,    HOME_H,  HOME_A,  HOME_E,  HOME_I,  KC_SLSH,
+     QK_GESC, HOME_N,  HOME_R,  HOME_T,  HOME_S,  KC_G,                               KC_P,    HOME_H,  HOME_A,  HOME_E,  HOME_I,  KC_SLSH,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_X,    KC_Q,    KC_M,    KC_W,    KC_Z,    KC_HOME,          KC_END,  KC_K,    KC_F,    KC_QUOT, KC_SCLN, KC_DOT,  KC_RSFT,
+     CW_TOGG, KC_X,    KC_Q,    KC_M,    KC_W,    KC_Z,    KC_MEH,           KC_HYPR, KC_K,    KC_F,    KC_QUOT, KC_SCLN, KC_DOT,  KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LGUI, TL_LOWR, KC_ENT,                    KC_SPC,  TL_UPPR, KC_RALT
+                                    QK_REP,  TL_LOWR, KC_ENT,                    KC_SPC,  TL_UPPR, KC_BSPC
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -76,10 +78,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
   // Your macros ...
 
+  if (record->event.pressed) {
+    // On every key press, print the event's keycode and matrix position.
+    dprintf("kc=0x%04X, row=%2u, col=%2u\n",
+        keycode, record->event.key.row, record->event.key.col);
+  }
+
   return true;
 }
 
 void matrix_scan_user(void) {
   achordion_task();
+}
+
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  // Exceptionally consider the following chords as holds, even though they
+  // are on the same hand in Dvorak.
+  /* switch (tap_hold_keycode) { */
+  /*   case HOME_A:  // A + U. */
+  /*     if (other_keycode == HOME_U) { return true; } */
+  /*     break; */
+
+  /*   case HOME_S:  // S + H and S + G. */
+  /*     if (other_keycode == HOME_H || other_keycode == KC_G) { return true; } */
+  /*     break; */
+  /* } */
+
+  // Also allow same-hand holds when the other key is in the rows below the
+  // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+  /* if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; } */
+  const uint16_t row = other_record->event.key.row;
+  const uint16_t col = other_record->event.key.col;
+  if (row == 4 || row == 9 || col == 0) { return true; }
+
+  // Otherwise, follow the opposite hands rule.
+  return achordion_opposite_hands(tap_hold_record, other_record);
 }
 
