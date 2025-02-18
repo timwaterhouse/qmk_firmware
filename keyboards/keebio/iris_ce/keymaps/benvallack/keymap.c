@@ -40,6 +40,7 @@ enum custom_layers {
 #define comm_v LGUI(KC_V)
 #define comm_gr LGUI(KC_GRAVE)
 #define comm_rb LGUI(KC_RBRC)
+#define ctrlf12 LCTL(KC_F12)
 #define ccs4 LGUI(KC_RBRC)
 #define lalt3 LALT(KC_3)
 #define lsft3 LSFT(KC_3)
@@ -79,38 +80,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_shortcut] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     RM_TOGG, _______, RM_NEXT, _______, RM_VALD, RM_VALU,                            _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, _______,
+     RM_TOGG, _______, RM_NEXT, _______, RM_VALD, RM_VALU,                            KC_VOLU, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_VALU, _______, KC_ESC,  c_s_t,   c_t,     _______,                            KC_VOLU, comm_c,  KC_UP,   KC_BSPC, comm_v,  QK_BOOT,
+     RM_HUEU, _______, KC_ESC,  c_s_t,   c_t,     _______,                            KC_VOLD, comm_c,  _______, KC_BSPC, comm_v,  QK_BOOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RM_VALD, comm_gr, td0,     td1,     comm_rb, ccs4,                               KC_VOLD, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,  _______,
+     RM_HUED, comm_gr, td0,     td1,     ctrlf12, _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,          _______, KC_MUTE, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  /* //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐ */
-  /*    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PGUP, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    KC_GRV,  _______, KC_UP,   _______, QK_BOOT, _______,                            _______, KC_P7,   KC_P8,   KC_P9,   KC_P0,   KC_PGDN, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LBRC,                            KC_RBRC, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, KC_PIPE, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    RM_NEXT, EE_CLR,  DT_PRNT, DT_DOWN, DT_UP,   KC_LCBR, KC_LPRN,          KC_RPRN, KC_RCBR, KC_P1,   KC_P2,   KC_P3,   KC_MINS, _______, */
-  /* //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘ */
-  /*                                   _______, _______, KC_DEL,                    KC_DEL,  _______, KC_P0 */
-  /*                               // └────────┴────────┴────────┘                 └────────┴────────┴────────┘ */
-  /* //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐ */
-  /*    KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    RM_TOGG, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, QK_BOOT, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    RM_NEXT, KC_MPRV, KC_MNXT, KC_VOLU, KC_PGUP, KC_UNDS,                            KC_EQL,  KC_HOME, RM_HUEU, RM_SATU, RM_VALU, KC_BSLS, */
-  /* //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤ */
-  /*    KC_MUTE, KC_MSTP, KC_MPLY, KC_VOLD, KC_PGDN, KC_MINS, KC_LPRN,          _______, KC_PLUS, KC_END,  RM_HUED, RM_SATD, RM_VALD, EE_CLR, */
-  /* //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘ */
-  /*                                   _______, _______, _______,                   _______, _______, _______ */
-  /*                               // └────────┴────────┴────────┘                 └────────┴────────┴────────┘ */
   ),
 
   [_syma] = LAYOUT(
@@ -147,9 +126,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______,                            _______, KC_7,    KC_8,    KC_9,    _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, KC_4,    KC_5,    KC_6,    _______, _______,
+     _______, _______, _______, _______, _______, _______,                            KC_ASTR, KC_4,    KC_5,    KC_6,    KC_PLUS, KC_EQL,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,          _______, _______, KC_1,    KC_2,    KC_3,    _______, _______,
+     _______, _______, _______, _______, _______, _______, _______,          _______, KC_SLSH, KC_1,    KC_2,    KC_3,    KC_MINS, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, KC_0
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -274,32 +253,32 @@ void dance_1_reset(tap_dance_state_t *state, void *user_data);
 
 void on_dance_1(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
-        tap_code16(LGUI(KC_LBRC));
-        tap_code16(LGUI(KC_LBRC));
-        tap_code16(LGUI(KC_LBRC));
+        tap_code16(LCTL(KC_F11));
+        tap_code16(LCTL(KC_F11));
+        tap_code16(LCTL(KC_F11));
     }
     if(state->count > 3) {
-        tap_code16(LGUI(KC_LBRC));
+        tap_code16(LCTL(KC_F11));
     }
 }
 
 void dance_1_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[1].step = dance_step(state);
     switch (dance_state[1].step) {
-        case SINGLE_TAP: register_code16(LGUI(KC_LBRC)); break;
+        case SINGLE_TAP: register_code16(LCTL(KC_F11)); break;
         case SINGLE_HOLD: register_code16(KC_END); break;
-        case DOUBLE_TAP: register_code16(LGUI(KC_LBRC)); register_code16(LGUI(KC_LBRC)); break;
-        case DOUBLE_SINGLE_TAP: tap_code16(LGUI(KC_LBRC)); register_code16(LGUI(KC_LBRC));
+        case DOUBLE_TAP: register_code16(LCTL(KC_F11)); register_code16(LCTL(KC_F11)); break;
+        case DOUBLE_SINGLE_TAP: tap_code16(LCTL(KC_F11)); register_code16(LCTL(KC_F11));
     }
 }
 
 void dance_1_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[1].step) {
-        case SINGLE_TAP: unregister_code16(LGUI(KC_LBRC)); break;
+        case SINGLE_TAP: unregister_code16(LCTL(KC_F11)); break;
         case SINGLE_HOLD: unregister_code16(KC_END); break;
-        case DOUBLE_TAP: unregister_code16(LGUI(KC_LBRC)); break;
-        case DOUBLE_SINGLE_TAP: unregister_code16(LGUI(KC_LBRC)); break;
+        case DOUBLE_TAP: unregister_code16(LCTL(KC_F11)); break;
+        case DOUBLE_SINGLE_TAP: unregister_code16(LCTL(KC_F11)); break;
     }
     dance_state[1].step = 0;
 }
